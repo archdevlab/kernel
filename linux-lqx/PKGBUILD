@@ -334,7 +334,7 @@ _package-headers(){
 }
 
 sha256sums=('8fa0588f0c2ceca44cac77a0e39ba48c9f00a6b9dc69761c02a5d3efac8da7f3'
-            'e9cd683a4e85681255f4bec7a67b7c86d4f3d0006f2b1335b47f73255fd417d7')
+            'dff39464023b4da7864059e17f17806a4bad128d0daa7c1fbe3bd68188141b39')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do

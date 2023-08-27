@@ -58,7 +58,7 @@ fi
 options=(!strip)
 
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
-        https://github.com/xanmod/linux/releases/download/$versiontag/patch-$versiontag.xz)
+        https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -339,7 +339,7 @@ _package-headers(){
 }
 
 sha256sums=('8fa0588f0c2ceca44cac77a0e39ba48c9f00a6b9dc69761c02a5d3efac8da7f3'
-            '4eb2e7c7553536beeed8c3228395b9157f89bc085a0d47f017680747e4c914b5')
+            'd8217e281446b1a5f86f4b76e93fa680a10134eb65f13c7c361a716f0f890feb')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
