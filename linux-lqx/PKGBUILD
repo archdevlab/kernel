@@ -1,11 +1,4 @@
-# _     _            _        _          _____
-#| |__ | | __ _  ___| | _____| | ___   _|___ /
-#| '_ \| |/ _` |/ __| |/ / __| |/ / | | | |_ \
-#| |_) | | (_| | (__|   <\__ \   <| |_| |___) |
-#|_.__/|_|\__,_|\___|_|\_\___/_|\_\\__, |____/
-#                                  |___/
-
-#Maintainer: blacksky3 <https://github.com/blacksky3>
+#Maintainer: archdevlab <https://github.com/archdevlab>
 #Credits: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 #Credits: Andreas Radke <andyrtr@archlinux.org>
 
@@ -41,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-lqx
-pkgver=6.4.12.lqx1
+pkgver=6.5.7.lqx1
 pkgrel=1
-major=6.4
-liquorixrel=16
-liquorixpatch=v6.4.12-lqx1
+major=6.5
+liquorixrel=8
+liquorixpatch=v6.5.7-lqx1
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0)
@@ -333,8 +326,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('8fa0588f0c2ceca44cac77a0e39ba48c9f00a6b9dc69761c02a5d3efac8da7f3'
-            'dff39464023b4da7864059e17f17806a4bad128d0daa7c1fbe3bd68188141b39')
+sha256sums=('7a574bbc20802ea76b52ca7faf07267f72045e861b18915c5272a98c27abf884'
+            '947d5ea3896e3c781b697c974f334e5a90abbf595c94286fb15565c5f06b2259')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do

@@ -1,11 +1,4 @@
-# _     _            _        _          _____
-#| |__ | | __ _  ___| | _____| | ___   _|___ /
-#| '_ \| |/ _` |/ __| |/ / __| |/ / | | | |_ \
-#| |_) | | (_| | (__|   <\__ \   <| |_| |___) |
-#|_.__/|_|\__,_|\___|_|\_\___/_|\_\\__, |____/
-#                                  |___/
-
-#Maintainer: blacksky3 <https://github.com/blacksky3>
+#Maintainer: archdevlab <https://github.com/archdevlab>
 #Credits: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 #Credits: Andreas Radke <andyrtr@archlinux.org>
 #Credits: Joan Figueras <ffigue at gmail dot com>
@@ -42,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-xanmod-edge
-pkgver=6.5.0.xanmod1
+pkgver=6.5.7.xanmod1
 pkgrel=1
 major=6.5
-versiontag=6.5.0-xanmod1
+versiontag=6.5.7-xanmod1
 arch=(x86_64)
 url='https://xanmod.org/'
 license=(GPL-2.0)
@@ -59,9 +52,9 @@ options=(!strip)
 
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
         # When new kernel is release. Keep in the edge directory
-        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
         # When new kernel is move in the main directory.
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
+        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -342,7 +335,7 @@ _package-headers(){
 }
 
 sha256sums=('7a574bbc20802ea76b52ca7faf07267f72045e861b18915c5272a98c27abf884'
-            'bcc96e944a22a14c67ce00eb9a125d0881ade5ad4da83ee42548fead25ceec44')
+            'f835ab9f227a9742821a2f236deabb2a17e5bc7d52f571ddfa25df4104a20504')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
