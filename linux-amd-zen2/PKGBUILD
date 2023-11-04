@@ -99,35 +99,36 @@ prepare(){
   #  fi
 
   # Set LTO with CLANG/LLVM
+  if [[ "$_compiler" = "2" ]]; then
 
-  msg "Enable THIN LTO"
-  scripts/config --enable CONFIG_LTO
-  scripts/config --enable CONFIG_LTO_CLANG
-  scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG
-  scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG_THIN
-  scripts/config --disable CONFIG_LTO_NONE
-  scripts/config --enable CONFIG_HAS_LTO_CLANG
-  scripts/config --disable CONFIG_LTO_CLANG_FULL
-  scripts/config --enable CONFIG_LTO_CLANG_THIN
-  scripts/config --enable CONFIG_HAVE_GCC_PLUGINS
+    msg "Enable THIN LTO"
+    scripts/config --enable CONFIG_LTO
+    scripts/config --enable CONFIG_LTO_CLANG
+    scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG
+    scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG_THIN
+    scripts/config --disable CONFIG_LTO_NONE
+    scripts/config --enable CONFIG_HAS_LTO_CLANG
+    scripts/config --disable CONFIG_LTO_CLANG_FULL
+    scripts/config --enable CONFIG_LTO_CLANG_THIN
+    scripts/config --enable CONFIG_HAVE_GCC_PLUGINS
 
-  #msg "Enable FULL LTO"
-  #scripts/config --enable CONFIG_LTO
-  #scripts/config --enable CONFIG_LTO_CLANG
-  #scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG
-  #scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG_THIN
-  #scripts/config --disable CONFIG_LTO_NONE
-  #scripts/config --enable CONFIG_HAS_LTO_CLANG
-  #scripts/config --enable CONFIG_LTO_CLANG_FULL
-  #scripts/config --disable CONFIG_LTO_CLANG_THIN
-  #scripts/config --enable CONFIG_HAVE_GCC_PLUGINS
+    #msg "Enable FULL LTO"
+    #scripts/config --enable CONFIG_LTO
+    #scripts/config --enable CONFIG_LTO_CLANG
+    #scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG
+    #scripts/config --enable CONFIG_ARCH_SUPPORTS_LTO_CLANG_THIN
+    #scripts/config --disable CONFIG_LTO_NONE
+    #scripts/config --enable CONFIG_HAS_LTO_CLANG
+    #scripts/config --enable CONFIG_LTO_CLANG_FULL
+    #scripts/config --disable CONFIG_LTO_CLANG_THIN
+    #scripts/config --enable CONFIG_HAVE_GCC_PLUGINS
 
-  #msg "Disable LTO"
-  #scripts/config --enable CONFIG_LTO_NONE
+    #msg "Disable LTO"
+    #scripts/config --enable CONFIG_LTO_NONE
 
-  sleep 2s
-
-  plain ""
+    sleep 2s
+    plain ""
+  fi
 
   msg "Apply some Archlinux config"
 
