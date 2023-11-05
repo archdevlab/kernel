@@ -34,7 +34,7 @@ fi
 
 ###################################################################################
 
-pkgbase=linux-amd-zen2
+pkgbase=linux-intel-alderlake
 pkgver=6.6.0
 _pkgver=6.6
 pkgrel=1
@@ -161,9 +161,9 @@ prepare(){
 
   plain ""
 
-  msg "Enable AMD Zen2 support"
+  msg "Enable Intel Alder Lake support"
   scripts/config --disable CONFIG_GENERIC_CPU
-  scripts/config --enable CONFIG_MZEN2
+  scripts/config --enable CONFIG_MALDERLAKE
 
   sleep 2s
 
@@ -200,11 +200,11 @@ build(){
   cd ${srcdir}/linux-$_pkgver
 
   msg "make -j$(nproc) all..."
-  make ARCH=${ARCH} ${BUILD_FLAGS[*]} KCFLAGS="-O2 -pipe -march=znver2 -mtune=znver2 -fstack-protector-strong" -j$(nproc) all
+  make ARCH=${ARCH} ${BUILD_FLAGS[*]} KCFLAGS="-O2 -pipe -march=alderlake -mtune=alderlake -fstack-protector-strong" -j$(nproc) all
 }
 
 _package(){
-  pkgdesc='The Linux kernel and modules - Compile with AMD Family 17h Zen 2 processors support'
+  pkgdesc='The Linux kernel and modules - Compile with Intel Alder Lake twelfth-generation processors support'
   depends=(coreutils initramfs kmod)
   optdepends=('wireless-regdb: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
