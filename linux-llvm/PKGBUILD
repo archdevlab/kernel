@@ -19,11 +19,11 @@ BUILD_FLAGS=(CC=clang CXX=clang++ HOSTCC=clang HOSTCXX=clang++ LD=ld.lld LLVM=1 
 ###################################################################################
 
 pkgbase=linux-llvm
-pkgver=6.7.0
-_pkgver=6.7
+pkgver=6.7.5
+_pkgver=6.7.5
 pkgrel=1
 major=6.7
-commit=79425d7496066714f38535eb4f37df529668e83a
+commit=59effaccc04811074877c73ba6697950f420dc28
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL2)
@@ -39,7 +39,8 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         ${archlinuxpath}/config
         # Arch patches
         0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
-        0002-drivers-firmware-skip-simpledrm-if-nvidia-drm.modese.patch)
+        0002-drivers-firmware-skip-simpledrm-if-nvidia-drm.modese.patch
+        0003-arch-Kconfig-Default-to-maximum-amount-of-ASLR-bits.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -288,10 +289,11 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('ef31144a2576d080d8c31698e83ec9f66bf97c677fa2aaf0d5bbb9f3345b1069'
-            '45a44ff0e957cd562d2ceb60c1c90fc19c19e808209cebb46bfacfccfb56ad96'
-            'f936aae4d832ac87db8fbb9effb066dd368d092f71dd7135d1548babdb7d10c8'
-            '758690814fbe8bba6e6ab91c80352bf328d49b686c74213f85039180aecb67df')
+sha256sums=('29f6464061b8179cbb77fc5591e06a2199324e018c9ed730ca3e6dfb145539ff'
+            '0f191864fd0d72c91b3f3b9e6ed6f38042bf3631ae394fedcf103c7d7755c793'
+            '053111806ccdb59d616522466274d578e44043a3b121669c0f58df9a6b6e297b'
+            '56c1cd522263987d556f4b80682f2ee300aa34d7d36d6aa0e3073bd07625fa7f'
+            '7f5412adb6a8d12cfcfa19ef0c0be29d2c9171fdfe5187d187073af0fb9ad3ef')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do

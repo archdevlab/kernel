@@ -35,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-rc
-pkgver=6.8rc1
-_pkgver=6.8-rc1
+pkgver=6.8rc5
+_pkgver=6.8-rc5
 pkgrel=1
-commit=7d2b6771ff6939d0ca6e8c9a7185d902a37b4eea
+commit=59effaccc04811074877c73ba6697950f420dc28
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL2)
@@ -306,9 +306,9 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('327c0c2dcbe348ab9902dc30511f5cfb239cfff8a8d285b29779c4b5bd7c8e42'
-            'aa47193f89794412776f36c970cabbf19e9abaccf01e3c33f4f891dd4661e5af'
-            'f936aae4d832ac87db8fbb9effb066dd368d092f71dd7135d1548babdb7d10c8')
+sha256sums=('702e946d85050640220fbd2504313de1a138510dabc9841fb48a69272e3c3eda'
+            '0f191864fd0d72c91b3f3b9e6ed6f38042bf3631ae394fedcf103c7d7755c793'
+            '053111806ccdb59d616522466274d578e44043a3b121669c0f58df9a6b6e297b')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
