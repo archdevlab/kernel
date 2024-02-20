@@ -35,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-xanmod-edge
-pkgver=6.7.0.xanmod1
+pkgver=6.7.5.xanmod1
 pkgrel=1
 major=6.7
-versiontag=6.7.0-xanmod1
+versiontag=6.7.5-xanmod1
 arch=(x86_64)
 url='https://xanmod.org/'
 license=(GPL-2.0)
@@ -52,9 +52,9 @@ options=(!strip)
 
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
         # When new kernel is release. Keep in the edge directory
-        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
         # When new kernel is move in the main directory.
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
+        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -335,7 +335,7 @@ _package-headers(){
 }
 
 sha256sums=('ef31144a2576d080d8c31698e83ec9f66bf97c677fa2aaf0d5bbb9f3345b1069'
-            'c2603413fa9c6eb3f393e1adbe72e13185598b25936879588ed32a41e71ef9f8')
+            'e0ce221aafb37c494083215cbbafd3f3515f9b72bcfd9cb056a6a9088ba114cd')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
