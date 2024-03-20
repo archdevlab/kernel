@@ -208,7 +208,7 @@ build(){
 
   msg "make all"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) all
-  make "make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1"
+  msg "make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
 }
 
