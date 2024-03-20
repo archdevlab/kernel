@@ -19,22 +19,60 @@ BUILD_FLAGS=(CC=clang CXX=clang++ HOSTCC=clang HOSTCXX=clang++ LD=ld.lld LLVM=1 
 ###################################################################################
 
 pkgbase=linux-llvm
-pkgver=6.7.5
-_pkgver=6.7.5
+pkgver=6.8.1
+_pkgver=6.8.1
 pkgrel=1
-major=6.7
-commit=59effaccc04811074877c73ba6697950f420dc28
+major=6.8
+commit=abef9db380deca88617f7014b683667ef6fc81e4
 arch=(x86_64)
 url='https://www.kernel.org/'
-license=(GPL2)
-makedepends=(bc cpio gettext git libelf pahole perl python tar xz kmod xmlto)
-makepends+=(graphviz imagemagick python-sphinx texlive-latexextra) # htmldocs
-makedepends+=(bison flex zstd make patch gcc gcc-libs glibc binutils)
-makedepends+=(clang llvm llvm-libs lld python)
-options=(!strip)
-
+license=(GPL-2.0-only)
+makedepends=(
+  bc
+  cpio
+  gettext
+  libelf
+  pahole
+  perl
+  python
+  tar
+  xz
+  kmod
+  xmlto
+  # htmldocs
+  graphviz
+  imagemagick
+  python-sphinx
+  python-yaml
+  texlive-latexextra
+)
+makedepends+=(
+  bison
+  flex
+  zstd
+  make
+  patch
+  gcc
+  gcc-libs
+  glibc
+  binutils
+  git
+)
+if [[ "$_compiler" = "2" ]]; then
+  makedepends+=(
+    clang
+    llvm
+    llvm-libs
+    lld
+    clang
+    python
+  )
+fi
+options=(
+  !debug
+  !strip
+)
 archlinuxpath=https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/$commit
-
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         ${archlinuxpath}/config
         # Arch patches
@@ -174,15 +212,29 @@ build(){
 
   msg "make -j$(nproc) all..."
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) all
+  make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
 }
 
 _package(){
   pkgdesc='The Linux kernel and modules - Build with LLVM/CLANG'
-  depends=(coreutils initramfs kmod)
-  optdepends=('wireless-regdb: to set the correct wireless channels of your country'
-              'linux-firmware: firmware images needed for some devices')
-  provides=(VIRTUALBOX-GUEST-MODULES WIREGUARD-MODULE KSMBD-MODULE)
-  replaces=(virtualbox-guest-modules-arch wireguard-arch)
+  depends=(
+    coreutils
+    initramfs
+    kmod
+  )
+  optdepends=(
+    'wireless-regdb: to set the correct wireless channels of your country'
+    'linux-firmware: firmware images needed for some devices'
+  )
+  provides=(
+    KSMBD-MODULE
+    VIRTUALBOX-GUEST-MODULES
+    WIREGUARD-MODULE
+  )
+  replaces=(
+    virtualbox-guest-modules-arch
+    wireguard-arch
+  )
 
   cd ${srcdir}/linux-$_pkgver
 
@@ -214,7 +266,7 @@ _package-headers(){
   local builddir="$pkgdir"/usr/lib/modules/"$(<version)"/build
 
   msg "Installing build files..."
-  install -Dt "$builddir" -m644 .config Makefile Module.symvers System.map *localversion* version vmlinux
+  install -Dt "$builddir" -m644 .config Makefile Module.symvers System.map *localversion* version vmlinux tools/bpf/bpftool/vmlinux.h
   install -Dt "$builddir/kernel" -m644 kernel/Makefile
   install -Dt "$builddir/arch/x86" -m644 arch/x86/Makefile
   cp -t "$builddir" -a scripts
@@ -289,11 +341,11 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('29f6464061b8179cbb77fc5591e06a2199324e018c9ed730ca3e6dfb145539ff'
-            '0f191864fd0d72c91b3f3b9e6ed6f38042bf3631ae394fedcf103c7d7755c793'
-            '053111806ccdb59d616522466274d578e44043a3b121669c0f58df9a6b6e297b'
-            '56c1cd522263987d556f4b80682f2ee300aa34d7d36d6aa0e3073bd07625fa7f'
-            '7f5412adb6a8d12cfcfa19ef0c0be29d2c9171fdfe5187d187073af0fb9ad3ef')
+sha256sums=('8d0c8936e3140a0fbdf511ad7a9f21121598f3656743898f47bb9052d37cff68'
+            'c2b00c84c4b543db431e06604d939a62f93107d18369f4d9860dc8062b01ab45'
+            '416609986399d3046811bcc2344f4ee0833b6c92e305da3925a6e193f810dad2'
+            'b4c85f49a0c0fe6d6ac1f55165c2c897000a7c6c0c30f258693d66223c0389fd'
+            'd9c0e2b3fa16f02abfd95d4c00747a43dd761e5cd622d40ab908155c5957759b')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
