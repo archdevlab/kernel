@@ -124,8 +124,7 @@ prepare(){
   plain ""
 
   # Copy the config file first
-  # Copy "${srcdir}"/linux-$major/CONFIGS/xanmod/gcc/config_x86-64-v3 to "${srcdir}"/linux-$major/.config
-  msg "Copy "${srcdir}"/linux-$major/CONFIGS/xanmod/gcc/config_x86-64-v3 to "${srcdir}"/linux-$major/.config"
+  msg "Copy the config file first..."
   cp "${srcdir}"/linux-$major/CONFIGS/xanmod/gcc/config_x86-64-v3 .config
 
   sleep 2s
