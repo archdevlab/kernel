@@ -255,8 +255,9 @@ prepare(){
 build(){
   cd "${srcdir}"/linux-$major
 
-  msg "make -j$(nproc) all..."
+  msg "make all"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) all
+  msg "make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
 }
 
@@ -275,6 +276,7 @@ _package(){
     KSMBD-MODULE
     VIRTUALBOX-GUEST-MODULES
     WIREGUARD-MODULE
+    NTFS3-MODULE
   )
   replaces=(
     virtualbox-guest-modules-arch
