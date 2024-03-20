@@ -88,7 +88,6 @@ options=(
   !debug
   !strip
 )
-
 archlinuxpath=https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/$commit
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         ${archlinuxpath}/config
