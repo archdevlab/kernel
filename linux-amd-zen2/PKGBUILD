@@ -207,7 +207,7 @@ prepare(){
 
   plain ""
 
-  msg "Supress depmod"
+  msg "Supress depmod..."
   sed -i '2iexit 0' scripts/depmod.sh
 
   sleep 2s
@@ -237,8 +237,9 @@ prepare(){
 build(){
   cd ${srcdir}/linux-$_pkgver
 
-  msg "make -j$(nproc) all..."
+  msg "make all"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} KCFLAGS="-O2 -pipe -march=znver2 -mtune=znver2 -fstack-protector-strong" -j$(nproc) all
+  msg "make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} KCFLAGS="-O2 -pipe -march=znver2 -mtune=znver2 -fstack-protector-strong" -j$(nproc) -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
 }
 
