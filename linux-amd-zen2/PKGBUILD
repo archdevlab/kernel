@@ -38,7 +38,7 @@ pkgbase=linux-amd-zen2
 pkgver=6.8.1
 _pkgver=6.8.1
 pkgrel=1
-major=6.7
+major=6.8
 commit=abef9db380deca88617f7014b683667ef6fc81e4
 arch=(x86_64)
 url='https://www.kernel.org/'
@@ -90,7 +90,6 @@ options=(
 )
 
 archlinuxpath=https://gitlab.archlinux.org/archlinux/packaging/packages/linux/-/raw/$commit
-
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         ${archlinuxpath}/config
         # Arch patches
