@@ -241,6 +241,7 @@ prepare(){
   plain ""
 
   # Config
+  msg "make olddefconfig..."
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} olddefconfig
 
   plain ""
