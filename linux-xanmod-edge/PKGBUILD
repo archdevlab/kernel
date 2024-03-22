@@ -204,6 +204,55 @@ prepare(){
 
   sleep 2s
 
+  # Module compression
+  msg2 "Enable CONFIG_MODULE_COMPRESS_ZSTD"
+  scripts/config --disable CONFIG_MODULE_COMPRESS_NONE
+  scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
+
+  sleep 2s
+
+  # Memory Management options
+  msg2 "Set Memory Management options" 
+  scripts/config --enable CONFIG_ZSWAP_DEFAULT_ON
+  scripts/config --disable CONFIG_ZSWAP_COMPRESSOR_DEFAULT_LZ4
+  scripts/config --enable CONFIG_ZSWAP_COMPRESSOR_DEFAULT_ZSTD
+  scripts/config --set-str CONFIG_ZSWAP_COMPRESSOR_DEFAULT "zstd"
+  scripts/config --disable CONFIG_ZSWAP_ZPOOL_DEFAULT_Z3FOLD
+  scripts/config --enable CONFIG_ZSWAP_ZPOOL_DEFAULT_ZSMALLOC
+  scripts/config --set-str CONFIG_ZSWAP_ZPOOL_DEFAULT "zsmalloc"
+  scripts/config --enable CONFIG_ZSMALLOC_STAT
+
+  sleep 2s
+
+  # Firmware loader
+  msg2 "Set Firmware loader options"
+  scripts/config --disable CONFIG_FW_LOADER_USER_HELPER
+
+  sleep 2s
+  
+  # Compression
+  msg2 "Set Compression options"
+  scripts/config --module CONFIG_CRYPTO_DEFLATE
+  scripts/config --module CONFIG_CRYPTO_LZO
+  scripts/config --module CONFIG_CRYPTO_842
+  scripts/config --module CONFIG_CRYPTO_LZ4
+  scripts/config --module CONFIG_CRYPTO_LZ4HC
+  scripts/config --enable CONFIG_CRYPTO_ZSTD
+
+  sleep 2s
+
+  plain ""
+
+  # Fixes https://aur.archlinux.org/cgit/aur.git/commit/?h=linux-xanmod&id=0f3e03d13f89e3b5019a60dca4347e393f061c2e
+  
+  msg "Fixes"
+  
+  msg2 "Enable BINDER in kernel image"
+  scripts/config --enable CONFIG_ANDROID_BINDERFS
+  scripts/config --enable CONFIG_ANDROID_BINDER_IPC
+
+  sleep 2s
+
   plain ""
 
   msg "Set HOSTNAME and LOCALVERSION"
