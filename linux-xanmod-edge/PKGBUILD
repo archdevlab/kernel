@@ -227,7 +227,7 @@ prepare(){
   # Protocols
   msg2 "Set Protocols options"
   scripts/config --disable CONFIG_ZRAM_DEF_COMP_LZORLE
-  scripts/config --enabled CONFIG_ZRAM_DEF_COMP_ZSTD
+  scripts/config --enable CONFIG_ZRAM_DEF_COMP_ZSTD
   scripts/config --set-str CONFIG_ZRAM_DEF_COMP "zstd"
 
   sleep 2s
