@@ -178,6 +178,7 @@ prepare(){
   msg "Apply some Archlinux config"
 
   msg2 "Compress modules by default (following Arch's kernel)"
+  scripts/config --disable CONFIG_MODULE_COMPRESS_NONE
   scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
 
   sleep 2s
@@ -204,13 +205,6 @@ prepare(){
 
   sleep 2s
 
-  # Module compression
-  msg2 "Enable CONFIG_MODULE_COMPRESS_ZSTD"
-  scripts/config --disable CONFIG_MODULE_COMPRESS_NONE
-  scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
-
-  sleep 2s
-
   # Memory Management options
   msg2 "Set Memory Management options" 
   scripts/config --enable CONFIG_ZSWAP_DEFAULT_ON
@@ -227,6 +221,14 @@ prepare(){
   # Firmware loader
   msg2 "Set Firmware loader options"
   scripts/config --disable CONFIG_FW_LOADER_USER_HELPER
+
+  sleep 2s
+
+  # Protocols
+  msg2 "Set Protocols options"
+  scripts/config --disable CONFIG_ZRAM_DEF_COMP_LZORLE
+  scripts/config --enabled CONFIG_ZRAM_DEF_COMP_ZSTD
+  scripts/config --set-str CONFIG_ZRAM_DEF_COMP "zstd"
 
   sleep 2s
   
