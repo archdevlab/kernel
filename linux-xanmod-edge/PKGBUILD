@@ -181,7 +181,6 @@ prepare(){
   msg2 "Compress modules by default (following Arch's kernel)"
   scripts/config --disable CONFIG_MODULE_COMPRESS_NONE
   scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
-  scripts/config --enable CONFIG_MODULE_DECOMPRESS
 
   sleep 2s
 
@@ -204,6 +203,18 @@ prepare(){
 
   msg2 "Enable CONFIG_USER_NS_UNPRIVILEGED"
   scripts/config --enable CONFIG_USER_NS
+
+  sleep 2s
+
+  # Module options
+  msg2 "Set Module options"
+  scripts/config --enable CONFIG_MODULE_DEBUGFS
+  scripts/config --enable CONFIG_MODULE_FORCE_LOAD
+  scripts/config --enable CONFIG_MODULE_FORCE_UNLOAD
+  scripts/config --enable CONFIG_MODULE_UNLOAD_TAINT_TRACKING
+  scripts/config --disable CONFIG_MODVERSIONS
+  scripts/config --enable CONFIG_MODULE_DECOMPRESS
+  scripts/config --enable CONFIG_MODULE_ALLOW_MISSING_NAMESPACE_IMPORTS
 
   sleep 2s
 
