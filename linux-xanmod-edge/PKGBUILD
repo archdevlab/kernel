@@ -181,6 +181,7 @@ prepare(){
   msg2 "Compress modules by default (following Arch's kernel)"
   scripts/config --disable CONFIG_MODULE_COMPRESS_NONE
   scripts/config --enable CONFIG_MODULE_COMPRESS_ZSTD
+  scripts/config --enable CONFIG_MODULE_DECOMPRESS
 
   sleep 2s
 
