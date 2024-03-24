@@ -243,6 +243,13 @@ prepare(){
 
   sleep 2s
 
+  # Tomoyo
+  msg2 "Set Tomoyo"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_POLICY_LOADER "/usr/bin/tomoyo-init"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_ACTIVATION_TRIGGER "/usr/lib/systemd/systemd"
+
+  sleep 2s
+
   plain ""
 
   # Fixes https://aur.archlinux.org/cgit/aur.git/commit/?h=linux-xanmod&id=0f3e03d13f89e3b5019a60dca4347e393f061c2e
