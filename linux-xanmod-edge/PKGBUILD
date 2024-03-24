@@ -124,8 +124,9 @@ prepare(){
   plain ""
 
   # Copy the config file first
+  # Use v1 to support all CPU
   msg "Copy the config file first..."
-  cp "${srcdir}"/linux-$major/CONFIGS/xanmod/gcc/config_x86-64-v3 .config
+  cp "${srcdir}"/linux-$major/CONFIGS/xanmod/gcc/config_x86-64-v1 .config
 
   sleep 2s
 
