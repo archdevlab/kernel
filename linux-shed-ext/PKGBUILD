@@ -236,6 +236,7 @@ _package(){
     coreutils
     initramfs
     kmod
+    scx-scheds
   )
   optdepends=(
     'wireless-regdb: to set the correct wireless channels of your country'
