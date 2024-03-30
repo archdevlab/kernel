@@ -1,0 +1,64 @@
+#Credits: Tejun Heo <tj@kernel.org>
+#Credits: Peter Jung ptr1337 <admin@ptr1337.dev>
+#Credits: Piotr Górski <lucjan.lucjanov@gmail.com>
+
+pkgname=scx-scheds
+pkgdesc='Sched_ext schedulers'
+pkgver=0.1.7
+pkgrel=1
+url='https://github.com/sched-ext/scx'
+arch=('x86_64')
+license=('GPL-2.0-only')
+depends=(libbpf bpf libelf zlib)
+makedepends=(python meson clang llvm-libs cargo rust)
+backup=('etc/default/scx')
+options=(!debug !lto)
+source=(https://github.com/sched-ext/scx/archive/refs/tags/v"${pkgver}".tar.gz)
+
+prepare(){
+ cd "${srcdir}"/scx-"${pkgver}"
+
+ local src
+  for src in "${source[@]}"; do
+    src="${src%%::*}"
+    src="${src##*/}"
+    [[ $src = *.patch ]] || continue
+    msg "Applying patch $src..."
+    patch -Np1 < "../$src"
+  done
+}
+
+build(){
+  cd scx-"${pkgver}"
+
+  rm -rf "${srcdir}"/build
+
+  local meson_options=(
+    -D b_ndebug=true
+    -D b_lto=false
+    -D buildtype=plain
+    --wrap-mode=nofallback
+    -D prefix=/usr
+    -D bindir=bin
+    -D datadir=share
+    -D includedir=include
+    -D libdir=lib
+    -D sysconfdir=/etc
+  )
+
+  meson "${srcdir}"/scx-"${pkgver}" "${srcdir}"/build "${meson_options[@]}"
+  meson configure --no-pager "${srcdir}"/build
+  meson compile -C "${srcdir}"/build
+}
+
+package(){
+  DESTDIR="${pkgdir}" meson install -C "${srcdir}"/build
+
+  # install license
+  install -dm755 "${pkgdir}"/usr/share/licenses/"${pkgname}"
+  install -m644 "${srcdir}"/scx-"${pkgver}"/LICENSE "${pkgdir}"/usr/share/licenses/"${pkgname}"/
+}
+
+sha256sums=('2f1e0c04b88fae1aa3cbf6cd84a57024fd878c48da49f2abe503e7494272e1cb')
+
+# vim:set ts=8 sts=2 sw=2 et:
