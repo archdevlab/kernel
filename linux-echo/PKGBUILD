@@ -34,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-echo
-pkgver=6.7.10
-_pkgver=6.7.10
+pkgver=6.8.1
+_pkgver=6.8.1
 pkgrel=1
-major=6.7
-commit=0bd29eb1601f9b1d256cf8b402ba7d5e2a04b441
+major=6.8
+commit=abef9db380deca88617f7014b683667ef6fc81e4
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
