@@ -226,8 +226,6 @@ build(){
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) all
   msg "make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
-  msg "make -C tools/shed_ext"
-  make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) -C tools/shed_ext
 }
 
 _package(){
