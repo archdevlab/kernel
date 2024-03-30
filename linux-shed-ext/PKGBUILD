@@ -171,6 +171,20 @@ prepare(){
   msg "Enable SCHED_EXT"
   scripts/config --enable CONFIG_SCHED_CLASS_EXT
   scripts/config --enable CONFIG_EXT_GROUP_SCHED
+  # recommended to include the following Kconfig options
+  scripts/config --enable CONFIG_BPF
+  scripts/config --enable CONFIG_BPF_SYSCALL
+  scripts/config --enable CONFIG_BPF_JIT
+  scripts/config --enable CONFIG_DEBUG_INFO_BTF
+  scripts/config --enable CONFIG_BPF_JIT_ALWAYS_ON
+  scripts/config --enable CONFIG_BPF_JIT_DEFAULT_ON
+  scripts/config --enable CONFIG_PAHOLE_HAS_SPLIT_BTF
+  scripts/config --enable CONFIG_PAHOLE_HAS_BTF_TAG
+  # useful debug features for sched_ext
+  scripts/config --enable CONFIG_DEBUG_INFO
+  scripts/config --enable CONFIG_SCHED_DEBUG
+  scripts/config --enable CONFIG_DEBUG_INFO_DWARF5
+  scripts/config --enable CONFIG_DEBUG_INFO_BTF_MODULES
 
   sleep 2s
 
