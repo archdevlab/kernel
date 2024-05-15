@@ -87,20 +87,18 @@ options=(
   !debug
   !strip
 )
-source=(#https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
+source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
         # When new kernel is release. Keep in the edge directory
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
+        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
         # When new kernel is move in the main directory.
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download
-        # Now pull the tag from Gitlab
-        https://gitlab.com/xanmod/linux/-/archive/"${versiontag}"/"${versiontag}".tar.gz)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 prepare(){
-  cd "${srcdir}"/linux-"${versiontag}"
+  cd "${srcdir}"/linux-"${major}"
 
   # hacky work around for xz not getting extracted
   # https://bbs.archlinux.org/viewtopic.php?id=265115
@@ -110,8 +108,8 @@ prepare(){
   #fi
 
   # Apply Xanmod patch
-  #msg "Apply Xanmod patch patch-$versiontag"
-  #patch -Np1 -i ../patch-$versiontag
+  msg "Apply Xanmod patch patch-$versiontag"
+  patch -Np1 -i ../patch-$versiontag
 
   # Apply any patch
   local src
@@ -128,7 +126,7 @@ prepare(){
   # Copy the config file first
   # Use v1 to support all CPU
   msg "Copy the config file first..."
-  cp "${srcdir}"/linux-"${versiontag}"/CONFIGS/xanmod/gcc/config_x86-64-v1 .config
+  cp "${srcdir}"/linux-"${major}"/CONFIGS/xanmod/gcc/config_x86-64-v1 .config
 
   sleep 2s
 
@@ -328,7 +326,7 @@ prepare(){
 }
 
 build(){
-  cd "${srcdir}"/linux-"${versiontag}"
+  cd "${srcdir}"/linux-"${major}"
 
   msg "make all"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) all
@@ -358,7 +356,7 @@ _package(){
     wireguard-arch
   )
 
-  cd "${srcdir}"/linux-"${versiontag}"
+  cd "${srcdir}"/linux-"${major}"
 
   local kernver="$(<version)"
   local modulesdir="${pkgdir}"/usr/lib/modules/${kernver}
@@ -463,7 +461,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('a6e8621fd3cbbbd263083d203564d1934f0d391b6cba4433f307e0a45de1411a')
+sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
+            '4ff14a5ba9d4a9fcb08c4677640282025cba03300073afe60a3729f74c2384e6')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
