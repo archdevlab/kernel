@@ -35,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-xanmod-edge
-pkgver=6.8.1.xanmod1
+pkgver=6.9.0.xanmod1
 pkgrel=1
-major=6.8
-versiontag=6.8.1-xanmod1
+major=6.9
+versiontag=6.9.0-xanmod1
 arch=(x86_64)
 url='https://xanmod.org/'
 license=(GPL-2.0-only)
@@ -87,18 +87,20 @@ options=(
   !debug
   !strip
 )
-source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
+source=(#https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
         # When new kernel is release. Keep in the edge directory
-        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
         # When new kernel is move in the main directory.
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download
+        # Now pull the tag from Gitlab
+        https://gitlab.com/xanmod/linux/-/archive/"${versiontag}"/"${versiontag}".tar.gz)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 prepare(){
-  cd "${srcdir}"/linux-$major
+  cd "${srcdir}"/linux-"${versiontag}"
 
   # hacky work around for xz not getting extracted
   # https://bbs.archlinux.org/viewtopic.php?id=265115
@@ -108,8 +110,8 @@ prepare(){
   #fi
 
   # Apply Xanmod patch
-  msg "Apply Xanmod patch patch-$versiontag"
-  patch -Np1 -i ../patch-$versiontag
+  #msg "Apply Xanmod patch patch-$versiontag"
+  #patch -Np1 -i ../patch-$versiontag
 
   # Apply any patch
   local src
@@ -126,7 +128,7 @@ prepare(){
   # Copy the config file first
   # Use v1 to support all CPU
   msg "Copy the config file first..."
-  cp "${srcdir}"/linux-$major/CONFIGS/xanmod/gcc/config_x86-64-v1 .config
+  cp "${srcdir}"/linux-"${versiontag}"/CONFIGS/xanmod/gcc/config_x86-64-v1 .config
 
   sleep 2s
 
@@ -144,7 +146,7 @@ prepare(){
   #  fi
 
   # Set LTO with CLANG/LLVM
-  
+
   if [[ "$_compiler" = "2" ]]; then
 
     msg "Enable THIN LTO"
@@ -219,7 +221,7 @@ prepare(){
   sleep 2s
 
   # Memory Management options
-  msg2 "Set Memory Management options" 
+  msg2 "Set Memory Management options"
   scripts/config --enable CONFIG_ZSWAP_DEFAULT_ON
   scripts/config --disable CONFIG_ZSWAP_COMPRESSOR_DEFAULT_LZ4
   scripts/config --enable CONFIG_ZSWAP_COMPRESSOR_DEFAULT_ZSTD
@@ -244,7 +246,7 @@ prepare(){
   scripts/config --set-str CONFIG_ZRAM_DEF_COMP "zstd"
 
   sleep 2s
-  
+
   # Compression
   msg2 "Set Compression options"
   scripts/config --module CONFIG_CRYPTO_DEFLATE
@@ -266,9 +268,9 @@ prepare(){
   plain ""
 
   # Fixes https://aur.archlinux.org/cgit/aur.git/commit/?h=linux-xanmod&id=0f3e03d13f89e3b5019a60dca4347e393f061c2e
-  
+
   msg "Fixes"
-  
+
   msg2 "Enable BINDER in kernel image"
   scripts/config --enable CONFIG_ANDROID_BINDERFS
   scripts/config --enable CONFIG_ANDROID_BINDER_IPC
@@ -326,7 +328,7 @@ prepare(){
 }
 
 build(){
-  cd "${srcdir}"/linux-$major
+  cd "${srcdir}"/linux-"${versiontag}"
 
   msg "make all"
   make ARCH=${ARCH} ${BUILD_FLAGS[*]} -j$(nproc) all
@@ -356,7 +358,7 @@ _package(){
     wireguard-arch
   )
 
-  cd "${srcdir}"/linux-$major
+  cd "${srcdir}"/linux-"${versiontag}"
 
   local kernver="$(<version)"
   local modulesdir="${pkgdir}"/usr/lib/modules/${kernver}

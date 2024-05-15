@@ -19,11 +19,11 @@ BUILD_FLAGS=(CC=clang CXX=clang++ HOSTCC=clang HOSTCXX=clang++ LD=ld.lld LLVM=1 
 ###################################################################################
 
 pkgbase=linux-llvm
-pkgver=6.8.1
-_pkgver=6.8.1
+pkgver=6.9.0
+_pkgver=6.9
 pkgrel=1
-major=6.8
-commit=abef9db380deca88617f7014b683667ef6fc81e4
+major=6.9
+commit=1e29f0ecf2221b2fbf580752f42ab5040d88b5e0
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
@@ -75,7 +75,8 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         # Arch patches
         0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
         0002-drivers-firmware-skip-simpledrm-if-nvidia-drm.modese.patch
-        0003-arch-Kconfig-Default-to-maximum-amount-of-ASLR-bits.patch)
+        0003-arch-Kconfig-Default-to-maximum-amount-of-ASLR-bits.patch
+        0004-docs-kernel_include.py-Fix-build-with-docutils-0.21..patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
