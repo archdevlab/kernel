@@ -175,9 +175,8 @@ prepare(){
     plain ""
   fi
 
-  msg "Enable Intel Alder Lake support"
-  scripts/config --disable CONFIG_GENERIC_CPU
-  scripts/config --enable CONFIG_MALDERLAKE
+  msg "Enable IPC classes of tasks"
+  scripts/config --enable CONFIG_IPC_CLASSES
 
   sleep 2s
 
