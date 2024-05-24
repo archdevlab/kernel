@@ -4,7 +4,7 @@
 
 pkgname=scx-scheds
 pkgdesc='Sched_ext schedulers'
-pkgver=0.1.7
+pkgver=0.1.9
 pkgrel=1
 url='https://github.com/sched-ext/scx'
 arch=('x86_64')
@@ -59,6 +59,6 @@ package(){
   install -m644 "${srcdir}"/scx-"${pkgver}"/LICENSE "${pkgdir}"/usr/share/licenses/"${pkgname}"/
 }
 
-sha256sums=('2f1e0c04b88fae1aa3cbf6cd84a57024fd878c48da49f2abe503e7494272e1cb')
+sha256sums=('b4e75d4d878c0d3764abd4eb74a3d6c158659c6be95dcc66aff807f53a787b16')
 
 # vim:set ts=8 sts=2 sw=2 et:
