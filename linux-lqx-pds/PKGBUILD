@@ -33,7 +33,7 @@ fi
 
 ###################################################################################
 
-pkgbase=linux-lqx
+pkgbase=linux-lqx-pds
 pkgver=6.8.10.lqx2
 pkgrel=1
 major=6.8
@@ -121,11 +121,18 @@ prepare(){
 
   plain ""
 
-  # Disable PDS/BMQ
-  msg "Disable PDS/BMQ"
-  scripts/config --disable CONFIG_SCHED_ALT
-  scripts/config --disable CONFIG_PDS
-  scripts/config --disable CONFIG_BMQ
+  # Enable PDS
+
+  msg "Enable PDS CPU Scheduler"
+
+  msg2 "Enable CONFIG_SCHED_ALT, this feature enable alternative CPU scheduler"
+  scripts/config --enable CONFIG_SCHED_ALT
+
+  sleep 2s
+
+  msg2 "Enable PDS"
+  scripts/config --disable CONFIG_SCHED_BMQ
+  scripts/config --enable CONFIG_SCHED_PDS
 
   sleep 2s
 
@@ -322,7 +329,7 @@ build(){
 }
 
 _package(){
-  pkgdesc='Liquorix kernel and modules'
+  pkgdesc='Liquorix kernel and modules - PDS enabled'
   depends=(
     coreutils
     initramfs
