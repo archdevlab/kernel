@@ -104,6 +104,19 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         0007-change-bs_shared_quota-to-105us.patch
         0008-port-select_task_fair-from-TT.patch)
 
+        0001-initial-baby-6.7.y-commit-Thu-Mar-21-04-32-59-PM-03-.patch
+        0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
+        0002-added-yield-from-tt.patch
+        0002-drivers-firmware-skip-simpledrm-if-nvidia-drm.modese.patch
+        0003-added-lat_sensitive.patch
+        0004-added-entity_end_min_slice-with-min-slice-7us.patch
+        0005-fix-update-candidate-to-pick-cfs_rq-head.patch
+        0006-make-quota-for-preempted-task-preserved.patch
+        0007-change-bs_shared_quota-to-105us.patch
+        0008-port-select_task_fair-from-TT.patch
+        0009-Fix-missing-sched_idle_cpu-when-enabling-NUMA.patch
+        0010-fair_group-and-autogroup-must-be-disabled-by-default.patch
+
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
