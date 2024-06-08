@@ -34,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-lqx
-pkgver=6.8.10.lqx2
+pkgver=6.9.3.lqx1
 pkgrel=1
-major=6.8
-liquorixrel=16
-liquorixpatch=v6.8.10-lqx2
+major=6.9
+liquorixrel=2
+liquorixpatch=v6.9.3-lqx1
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
@@ -110,7 +110,7 @@ prepare(){
   #   msg "Applying patch $src..."
   #   patch -Np1 < "../$src"
   # done
-  
+
   # Add Liquorix patches
   local _patchfolder="${srcdir}/liquorix-package-$major-$liquorixrel/linux-liquorix/debian/patches"
   grep -P '^(zen|lqx)/' "$_patchfolder/series" | while IFS= read -r line
@@ -186,6 +186,15 @@ prepare(){
   ## Use DWARF5 debug info for Arch
   msg "Upgrading debug info from toolchain default to DWARF v5..."
   scripts/config -e CONFIG_DEBUG_INFO_DWARF5
+
+  sleep 2s
+
+  msg "Fixes"
+
+  # Tomoyo
+  msg2 "Fix Tomoyo"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_POLICY_LOADER "/usr/bin/tomoyo-init"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_ACTIVATION_TRIGGER "/usr/lib/systemd/systemd"
 
   sleep 2s
 
@@ -379,8 +388,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('c969dea4e8bb6be991bbf7c010ba0e0a5643a3a8d8fb0a2aaa053406f1e965f3'
-            'a82dc2d55f8e0b08aba65b549164db4c2eeaf3efa5b611521c5836a1152d60d3')
+sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
+            'd36a9811b6e88d10d9f9cd3d9ec6cbaa34140ff54c239747a6b4dd9f6f401f50')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
