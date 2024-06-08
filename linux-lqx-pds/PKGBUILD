@@ -198,17 +198,6 @@ prepare(){
 
   plain ""
 
-  msg "Fixes"
-
-  # Tomoyo
-  msg2 "Fix Tomoyo"
-  scripts/config --set-str CONFIG_SECURITY_TOMOYO_POLICY_LOADER "/usr/bin/tomoyo-init"
-  scripts/config --set-str CONFIG_SECURITY_TOMOYO_ACTIVATION_TRIGGER "/usr/lib/systemd/systemd"
-
-  sleep 2s
-
-  plain ""
-
   msg "Set HOSTNAME and LOCALVERSION"
 
   msg2 "Remove (none) from CONFIG_DEFAULT_HOSTNAME and set it to archlinux"

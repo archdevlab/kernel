@@ -218,13 +218,6 @@ prepare(){
 
   sleep 2s
 
-  # Tomoyo
-  msg2 "Fix Tomoyo"
-  scripts/config --set-str CONFIG_SECURITY_TOMOYO_POLICY_LOADER "/usr/bin/tomoyo-init"
-  scripts/config --set-str CONFIG_SECURITY_TOMOYO_ACTIVATION_TRIGGER "/usr/lib/systemd/systemd"
-
-  sleep 2s
-
   plain ""
 
   msg "Set HOSTNAME and LOCALVERSION"
