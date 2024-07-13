@@ -186,7 +186,7 @@ prepare(){
   msg "Fixes"
 
   ## Use DWARF5 debug info for Arch
-  msgs "Upgrading debug info from toolchain default to DWARF v5..."
+  msg "Upgrading debug info from toolchain default to DWARF v5..."
   scripts/config -e CONFIG_DEBUG_INFO_DWARF5
 
   sleep 2s
