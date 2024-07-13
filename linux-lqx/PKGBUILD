@@ -34,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-lqx
-pkgver=6.9.3.lqx1
+pkgver=6.9.9.lqx1
 pkgrel=1
 major=6.9
-liquorixrel=2
-liquorixpatch=v6.9.3-lqx1
+liquorixrel=8
+liquorixpatch=v6.9.9-lqx1
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
@@ -183,13 +183,19 @@ prepare(){
     plain ""
   fi
 
+  msg "Fixes"
+
   ## Use DWARF5 debug info for Arch
-  msg "Upgrading debug info from toolchain default to DWARF v5..."
+  msgs "Upgrading debug info from toolchain default to DWARF v5..."
   scripts/config -e CONFIG_DEBUG_INFO_DWARF5
 
   sleep 2s
 
-  plain ""
+  msg2 "Replacing Debian TOMOYO configuration with upstream Arch Linux"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_POLICY_LOADER "/usr/bin/tomoyo-init"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_ACTIVATION_TRIGGER "/usr/lib/systemd/systemd"
+
+  sleep 2s
 
   msg "Set HOSTNAME and LOCALVERSION"
 
@@ -380,7 +386,7 @@ _package-headers(){
 }
 
 sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
-            'd36a9811b6e88d10d9f9cd3d9ec6cbaa34140ff54c239747a6b4dd9f6f401f50')
+            'c72d3783963efd9613a8d106edc7a7ef7515b2b633b4457163d65844d6dbadc4')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do

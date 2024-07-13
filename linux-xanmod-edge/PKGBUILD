@@ -35,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-xanmod-edge
-pkgver=6.9.3.xanmod1
+pkgver=6.9.9.xanmod1
 pkgrel=1
 major=6.9
-versiontag=6.9.3-xanmod1
+versiontag=6.9.9-xanmod1
 arch=(x86_64)
 url='https://xanmod.org/'
 license=(GPL-2.0-only)
@@ -208,13 +208,17 @@ prepare(){
 
   plain ""
 
-  # Fixes https://aur.archlinux.org/cgit/aur.git/commit/?h=linux-xanmod&id=0f3e03d13f89e3b5019a60dca4347e393f061c2e
-
   msg "Fixes"
 
   msg2 "Enable BINDER in kernel image"
   scripts/config --enable CONFIG_ANDROID_BINDERFS
   scripts/config --enable CONFIG_ANDROID_BINDER_IPC
+
+  sleep 2s
+
+  msg2 "Replacing Debian TOMOYO configuration with upstream Arch Linux"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_POLICY_LOADER "/usr/bin/tomoyo-init"
+  scripts/config --set-str CONFIG_SECURITY_TOMOYO_ACTIVATION_TRIGGER "/usr/lib/systemd/systemd"
 
   sleep 2s
 
@@ -234,6 +238,15 @@ prepare(){
 
   msg2 "Enable CONFIG_LOCALVERSION_AUTO"
   scripts/config --enable CONFIG_LOCALVERSION_AUTO
+
+  sleep 2s
+
+  plain ""
+
+  msg "Set Font"
+  scripts/config --disable CONFIG_FONTS
+  scripts/config --enable CONFIG_FONT_8x8
+  scripts/config --enable CONFIG_FONT_8x16
 
   sleep 2s
 
@@ -405,7 +418,7 @@ _package-headers(){
 }
 
 sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
-            '96c10d32ba2b1ad0043c90d88337793237a426001985a9ca6b53bfb107ac1d80')
+            'b7126cea3f56a92b7780b52ab889c5962b910c4cb2a4bbc8a0732e04430cca47')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
