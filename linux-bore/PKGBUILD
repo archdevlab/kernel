@@ -176,6 +176,13 @@ prepare(){
     plain ""
   fi
 
+  msg "Set Font"
+  scripts/config --disable CONFIG_FONTS
+  scripts/config --enable CONFIG_FONT_8x8
+  scripts/config --enable CONFIG_FONT_8x16
+
+  sleep 2s
+
   # Supress depmod
   msg "Supress depmod..."
   sed -i '2iexit 0' scripts/depmod.sh
