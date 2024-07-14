@@ -185,8 +185,9 @@ prepare(){
 
   # https://gitlab.archlinux.org/archlinux/packaging/packages/linux-zen/-/issues/3
   msg "Set Font"
+  scripts/config --disable CONFIG_FONTS
   scripts/config --enable CONFIG_FONT_8x8
-  scripts/config --disable CONFIG_FONT_TER16x32
+  scripts/config --enable CONFIG_FONT_8x16
 
   sleep 2s
 
