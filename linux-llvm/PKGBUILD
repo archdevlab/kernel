@@ -141,6 +141,10 @@ prepare(){
   #msg "Disable LTO"
   #scripts/config --enable CONFIG_LTO_NONE
 
+  sleep 2s 
+
+  plain ""
+
   msg "Set Font"
   scripts/config --disable CONFIG_FONTS
   scripts/config --enable CONFIG_FONT_8x8
