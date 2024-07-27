@@ -35,11 +35,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-intel
-pkgver=6.9.0
-_pkgver=6.9
+pkgver=6.10.1
+_pkgver=6.10.1
 pkgrel=1
-major=6.9
-commit=1e29f0ecf2221b2fbf580752f42ab5040d88b5e0
+major=6.10
+commit=c46c57d605e71bd94b6842006b68ce9277fddf15
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
@@ -100,10 +100,14 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         # CachyOS
         0001-intel-thread-director.patch
         # Xanmod
-        0002-sched-wait-Do-accept-in-LIFO-order-for-cache-efficie.patch
-        0003-firmware-Enable-stateless-firmware-loading.patch
-        0004-locking-rwsem-spin-faster.patch
-        0005-drivers-initialize-ata-before-graphics.patch)
+        0001-sched-wait-Do-accept-in-LIFO-order-for-cache-efficie.patch
+        0002-firmware-Enable-stateless-firmware-loading.patch
+        0003-locking-rwsem-spin-faster.patch
+        0004-drivers-initialize-ata-before-graphics.patch
+        # sirlucjan
+        0001-x86-sched-Introduce-arch_rebuild_sched_domains.patch
+        0002-x86-sched-Add-basic-support-for-CPU-capacity-scaling.patch
+        0003-cpufreq-intel_pstate-Set-asymmetric-CPU-capacity-on-.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
