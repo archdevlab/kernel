@@ -35,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-xanmod-edge
-pkgver=6.9.9.xanmod1
+pkgver=6.10.1.xanmod1
 pkgrel=1
-major=6.9
-versiontag=6.9.9-xanmod1
+major=6.10
+versiontag=6.10.1-xanmod1
 arch=(x86_64)
 url='https://xanmod.org/'
 license=(GPL-2.0-only)
@@ -89,9 +89,9 @@ options=(
 )
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
         # When new kernel is release. Keep in the edge directory
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download
+        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
         # When new kernel is move in the main directory.
-        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -126,7 +126,7 @@ prepare(){
   # Copy the config file first
   # Use v1 to support all CPU
   msg "Copy the config file first..."
-  cp "${srcdir}"/linux-"${major}"/CONFIGS/xanmod/gcc/config_x86-64-v1 .config
+  cp "${srcdir}"/linux-"${major}"/CONFIGS/xanmod/gcc/config_x86-64-v3 .config
 
   sleep 2s
 
@@ -417,8 +417,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
-            'b7126cea3f56a92b7780b52ab889c5962b910c4cb2a4bbc8a0732e04430cca47')
+sha256sums=('774698422ee54c5f1e704456f37c65c06b51b4e9a8b0866f34580d86fef8e226'
+            'b1d337db2d1b062fe070169c1bdd69291cd6239566560fafc9debfce8a2e316f')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
