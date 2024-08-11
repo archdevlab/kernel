@@ -19,11 +19,11 @@ BUILD_FLAGS=(CC=clang CXX=clang++ HOSTCC=clang HOSTCXX=clang++ LD=ld.lld LLVM=1 
 ###################################################################################
 
 pkgbase=linux-llvm
-pkgver=6.10.1
-_pkgver=6.10.1
+pkgver=6.10.3
+_pkgver=6.10.3
 pkgrel=1
 major=6.10
-commit=c46c57d605e71bd94b6842006b68ce9277fddf15
+commit=9f4aff504e923944a54f32eba06de62be2f66097
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
