@@ -34,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-lqx-bmq
-pkgver=6.9.9.lqx1
+pkgver=6.10.3.lqx1
 pkgrel=1
-major=6.9
-liquorixrel=8
-liquorixpatch=v6.9.9-lqx1
+major=6.10
+liquorixrel=1
+liquorixpatch=v6.10.3-lqx1
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
@@ -394,8 +394,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('24fa01fb989c7a3e28453f117799168713766e119c5381dac30115f18f268149'
-            'c72d3783963efd9613a8d106edc7a7ef7515b2b633b4457163d65844d6dbadc4')
+sha256sums=('774698422ee54c5f1e704456f37c65c06b51b4e9a8b0866f34580d86fef8e226'
+            '497c6eeff20f5dd1a0eb629e397f8bd08757508eb87554d40a8765199dcd7659')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
