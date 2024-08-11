@@ -35,11 +35,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-sched-ext
-pkgver=6.9.1
-_pkgver=6.9.1
+pkgver=6.10.3
+_pkgver=6.10.3
 pkgrel=1
-major=6.9
-commit=b0c9bf78acbdcdf90405c427cf6b751259baee74
+major=6.10
+commit=9f4aff504e923944a54f32eba06de62be2f66097
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
