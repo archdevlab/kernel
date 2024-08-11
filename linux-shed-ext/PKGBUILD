@@ -96,7 +96,7 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         0002-drivers-firmware-skip-simpledrm-if-nvidia-drm.modese.patch
         0003-arch-Kconfig-Default-to-maximum-amount-of-ASLR-bits.patch
         0004-docs-kernel_include.py-Fix-build-with-docutils-0.21..patch
-        linux-v6.9.1-scx1.patch)
+        linux-v6.10.3-scx1.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
