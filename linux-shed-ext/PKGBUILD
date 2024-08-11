@@ -95,7 +95,8 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         0001-ZEN-Add-sysctl-and-CONFIG-to-disallow-unprivileged-C.patch
         0002-drivers-firmware-skip-simpledrm-if-nvidia-drm.modese.patch
         0003-arch-Kconfig-Default-to-maximum-amount-of-ASLR-bits.patch
-        0004-docs-kernel_include.py-Fix-build-with-docutils-0.21..patch
+        0004-ALSA-hda-Conditionally-use-snooping-for-AMD-HDMI.patch
+        0005-x86-apic-Remove-logical-destination-mode-for-64-bit.patch
         linux-v6.10.3-scx1.patch)
 
 export KBUILD_BUILD_HOST=archlinux
