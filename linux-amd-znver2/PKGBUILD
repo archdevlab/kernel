@@ -34,7 +34,7 @@ fi
 
 ###################################################################################
 
-pkgbase=linux-amd-zen2
+pkgbase=linux-amd-znver2
 pkgver=6.10.3
 _pkgver=6.10.3
 pkgrel=1
