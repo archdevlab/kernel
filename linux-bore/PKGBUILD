@@ -97,7 +97,7 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$_pkgver.tar.xz
         0004-ALSA-hda-Conditionally-use-snooping-for-AMD-HDMI.patch
         0005-x86-apic-Remove-logical-destination-mode-for-64-bit.patch
         # BORE Patch
-        0001-linux6.10.y-bore5.2.8.patch)
+        0001-linux6.11.y-bore5.3.0.patch)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
