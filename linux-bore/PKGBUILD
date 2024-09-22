@@ -34,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-bore
-pkgver=6.10.3
-_pkgver=6.10.3
+pkgver=6.11.0
+_pkgver=6.11
 pkgrel=1
-major=6.10
-commit=9f4aff504e923944a54f32eba06de62be2f66097
+major=6.11
+commit=14fad3df4488776debb20a3abdd9ae98efaa9df5
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
