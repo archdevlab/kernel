@@ -34,7 +34,7 @@ fi
 ###################################################################################
 
 pkgbase=linux-zen-bmq
-pkgver=6.10.0.zen1
+pkgver=6.11.0.zen1
 pkgrel=1
 linuxver=6.11
 commit=a3590fce832d275caed26420c1d8c93e2b2f974b
