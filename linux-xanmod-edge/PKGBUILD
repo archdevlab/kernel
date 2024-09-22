@@ -35,10 +35,10 @@ fi
 ###################################################################################
 
 pkgbase=linux-xanmod-edge
-pkgver=6.10.3.xanmod1
+pkgver=6.11.0.xanmod1
 pkgrel=1
-major=6.10
-versiontag=6.10.3-xanmod1
+major=6.11
+versiontag=6.11.0-xanmod1
 arch=(x86_64)
 url='https://xanmod.org/'
 license=(GPL-2.0-only)
@@ -50,6 +50,9 @@ makedepends=(
   pahole
   perl
   python
+  rust
+  rust-bindgen
+  rust-src
   tar
   xz
   kmod
@@ -89,9 +92,9 @@ options=(
 )
 source=(https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-$major.tar.xz
         # When new kernel is release. Keep in the edge directory
-        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
+        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/edge/$versiontag/patch-$versiontag.xz/download)
         # When new kernel is move in the main directory.
-        patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
+        #patch-$versiontag.xz::https://sourceforge.net/projects/xanmod/files/releases/main/$versiontag/patch-$versiontag.xz/download)
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -417,8 +420,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('774698422ee54c5f1e704456f37c65c06b51b4e9a8b0866f34580d86fef8e226'
-            'e0b4fd44086886b873d0af0222a7bdb5c70a63c5d47939c375dba392b4673921')
+sha256sums=('55d2c6c025ebc27810c748d66325dd5bc601e8d32f8581d9e77673529bdacb2e'
+            'eabfac5fa947a119f6a7034c2d3fc0d8545a5585e70bcaf7c2f91a3c0f07cb08')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
