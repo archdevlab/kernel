@@ -34,11 +34,11 @@ fi
 ###################################################################################
 
 pkgbase=linux-lqx-bmq
-pkgver=6.10.3.lqx1
+pkgver=6.11.3.lqx1
 pkgrel=1
-major=6.10
-liquorixrel=1
-liquorixpatch=v6.10.3-lqx1
+major=6.11
+liquorixrel=3
+liquorixpatch=v6.11.3-lqx1
 arch=(x86_64)
 url='https://www.kernel.org/'
 license=(GPL-2.0-only)
@@ -50,6 +50,9 @@ makedepends=(
   pahole
   perl
   python
+  rust
+  rust-bindgen
+  rust-src
   tar
   xz
   kmod
@@ -323,6 +326,7 @@ _package-headers(){
   install -Dt "$builddir/kernel" -m644 kernel/Makefile
   install -Dt "$builddir/arch/x86" -m644 arch/x86/Makefile
   cp -t "$builddir" -a scripts
+  ln -srt "$builddir" "$builddir/scripts/gdb/vmlinux-gdb.py"
 
   # required when STACK_VALIDATION is enabled
   install -Dt "$builddir/tools/objtool" tools/objtool/objtool
@@ -394,8 +398,8 @@ _package-headers(){
   ln -sr "$builddir" "$pkgdir/usr/src/$pkgbase"
 }
 
-sha256sums=('774698422ee54c5f1e704456f37c65c06b51b4e9a8b0866f34580d86fef8e226'
-            '497c6eeff20f5dd1a0eb629e397f8bd08757508eb87554d40a8765199dcd7659')
+sha256sums=('55d2c6c025ebc27810c748d66325dd5bc601e8d32f8581d9e77673529bdacb2e'
+            'dacd9091417d7c185e6ca1ec9d934a89f1c10184bd1ac3836bf1313aceecc6e0')
 
 pkgname=($pkgbase $pkgbase-headers)
 for _p in "${pkgname[@]}"; do
